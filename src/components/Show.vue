@@ -20,14 +20,14 @@ export default{
     data () {
         return {
             'id': this.show.id,
-            'imdb': this.show.imdb,
+            'imdb': this.show.imdbID,
             info: null,
             'apikey': process.env.VUE_APP_API_KEY
         }
     },
     methods:{
         episodes(){
-            this.$router.push({ name: 'episodes', params: { id: this.show.imdb } })
+            this.$router.push({ name: 'episodes', params: { id: this.show.imdbID } })
         }
     },
     mounted () {

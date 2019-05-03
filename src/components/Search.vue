@@ -6,7 +6,8 @@
             <div v-if="results">
                 <div v-for="result in results" :key="result.imdbID">
                     <div class="card-body">
-                        <h5 class="card-text">{{result.Title}}</h5>
+                        <img v-bind:src="result.Poster" class="img-circle"/>
+                        <h5 class="card-text">{{result.Title}} ({{result.imdbID}})</h5>
                     </div>
                 </div>
             </div> 
@@ -32,5 +33,4 @@ export default{
         }
     }
 }
-
 </script>

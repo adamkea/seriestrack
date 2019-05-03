@@ -3,7 +3,10 @@
         <ul class="nav">
             <li><router-link :to="{name: 'home'}">My Shows</router-link></li>
             <li><router-link :to="{name: 'search'}">Find Shows</router-link></li>
-            <li><router-link :to="{name: 'account'}">Account</router-link></li>
+            <!-- <li><router-link :to="{name: 'account'}">Account</router-link></li> -->
+            <li><router-link :to="{name: 'login'}">Login</router-link></li>
+            <li><router-link :to="{name: 'register'}">Register</router-link></li>
+
         </ul>
         <router-view></router-view>
     </div>

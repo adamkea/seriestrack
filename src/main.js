@@ -6,6 +6,7 @@ import axios from 'axios'
 import routes from './routes'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
+import {store} from './store/store'
 import BootstrapVue from "bootstrap-vue"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
@@ -23,6 +24,7 @@ const router = new VueRouter({
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store: store,
   router: router,
   components: { Master },
   template: '<Master/>'
