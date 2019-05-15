@@ -1,9 +1,11 @@
 <template>
-    <div v-if="info" class="card w-50 d-flex " v-on:click="episodes()">
+    <div class="col-md-4 d-flex">
+        <div v-if="info" class="card flex-fill" v-on:click="episodes()">
             <h5 class="card-header">{{info.Title}}</h5>
             <div class="card-body">
-                <h5 class="card-text">{{info.Plot}}</h5>
+                <img :src="info.Poster" class="rounded-circle z-depth-10 img-fluid " data-holder-rendered="true"  />
             </div>
+        </div>
     </div>
 </template>
 

@@ -1,18 +1,20 @@
 <template>
-    <div class="flex-center">
-        <div>
-            <h2 class="text-center">Find Shows</h2>
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search" v-model="search" v-on:keyup.enter="searchShow(search)">
-            <div v-if="results">
-                <div v-for="result in results" :key="result.imdbID">
-                    <div class="card-body">
-                        <img v-bind:src="result.Poster" class="img-circle"/>
-                        <h5 class="card-text">{{result.Title}} ({{result.imdbID}})</h5>
+    <div class="container mt-4">
+        <h2 class="text-center">Find Shows</h2>
+        <input class="form-control mb-4" type="text" placeholder="Search" aria-label="Search" v-model="search" v-on:keyup.enter="searchShow(search)">
+        <div v-if="results" class="row">
+            <div v-for="result in results" :key="result.imdbID" :result="result">
+                <div class="col-md-4 d-flex">
+                    <div class="card flex-fill">
+                        <h5 class="card-header">{{result.Title}}</h5>
+                        <div class="card-body">
+                            <h5 class="card-text">Test</h5>
+                        </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
-      </div>
+    </div>
 </template>
 
 <script>
@@ -34,3 +36,16 @@ export default{
     }
 }
 </script>
+
+<style>
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    cursor: pointer; 
+}
+
+.card-body:hover{
+    background: lightblue;
+}
+</style>

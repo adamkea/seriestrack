@@ -1,9 +1,9 @@
 <template>
-    <div class="flex-center">
-        <div>
-            <show v-for="show in myShows" :key="show.id" :show="show"/>
+        <div class="container mt-4">
+            <div class="row">
+                <show v-for="show in myShows" :key="show.id" :show="show"/>
+            </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -19,7 +19,6 @@ export default {
     },
     computed:{
         myShows(){
-            console.log(this.$store.getters.myShows)
             return this.$store.getters.myShows
         }
     }

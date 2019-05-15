@@ -26,11 +26,26 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
 export default{
     name:'login',
     data: function(){
         return {
-            
+            email: '',
+            password: ''
+        }
+    },
+    methods:{
+        login: function(e){
+            firebase.auth().signInWithEmailAndPassword(this.email,this.password)
+                .then(user => {
+                    alert('Logged in');
+                    this.$router.go({ path: this.$router.path });
+                },
+                err => {
+                    alert(err.message);
+                });
+            e.preventDefault();
         }
     }
 }

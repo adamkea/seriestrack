@@ -25,7 +25,6 @@ export const store = new Vuex.Store({
                 .then(querySnapshot => {
                     let tempShows = []
                     querySnapshot.forEach(doc => {
-                        console.log(doc.id)
                         const data = {
                             id: doc.id,
                             imdbID: doc.data().imdbID

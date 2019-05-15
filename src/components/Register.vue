@@ -37,10 +37,10 @@ export default{
     },
     methods:{
         register: function(e){
-            firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.email,this.password)
+            firebase.auth().createUserWithEmailAndPassword(this.email,this.password)
                 .then(user => {
-                    alert(`Account Created for ${user.email}`);
-                    this.$router.push('/search');
+                    alert('Account created');
+                    this.$router.go({ path: this.$router.path });
                 },
                 err => {
                     alert(err.message);

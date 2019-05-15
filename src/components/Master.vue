@@ -1,20 +1,39 @@
 <template>
     <div id="app">
         <ul class="nav">
-            <li><router-link :to="{name: 'home'}">My Shows</router-link></li>
-            <li><router-link :to="{name: 'search'}">Find Shows</router-link></li>
-            <!-- <li><router-link :to="{name: 'account'}">Account</router-link></li> -->
-            <li><router-link :to="{name: 'login'}">Login</router-link></li>
-            <li><router-link :to="{name: 'register'}">Register</router-link></li>
-
+            <li><router-link v-if="isLoggedIn" :to="{name: 'home'}">My Shows</router-link></li>
+            <li><router-link v-if="isLoggedIn" :to="{name: 'search'}">Find Shows</router-link></li>
+            <li><router-link v-if="!isLoggedIn" :to="{name: 'login'}">Login</router-link></li>
+            <li><router-link v-if="!isLoggedIn" :to="{name: 'register'}">Register</router-link></li>
+            <li><button type="button" class="btn btn-primary" v-if="isLoggedIn" v-on:click="logout">Logout</button></li>
         </ul>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
+import firebase from 'firebase/app'
 export default {
-    
+    name: 'master',
+    data(){
+      return{
+        isLoggedIn: false,
+        currentUser: false
+      }
+    },
+    created(){
+      if(firebase.auth().currentUser){
+        this.isLoggedIn = true;
+        this.currentUser = firebase.auth().currentUser.email;
+      }
+    },
+    methods:{
+      logout: function(){
+        firebase.auth().signOut().then(() =>  {
+          this.$router.go({ path: this.$router.path });
+        });
+      }
+    }
 }
 </script>
 

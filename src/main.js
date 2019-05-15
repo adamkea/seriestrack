@@ -3,30 +3,30 @@
 import Vue from 'vue'
 import Master from './components/Master'
 import axios from 'axios'
-import routes from './routes'
+import router from './routes'
 import VueAxios from 'vue-axios'
-import VueRouter from 'vue-router'
 import {store} from './store/store'
 import BootstrapVue from "bootstrap-vue"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
- 
+import firebase from 'firebase'; 
+
 Vue.use(VueAxios, axios)
-Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
-const router = new VueRouter({
-  routes,
-  mode: 'history'
-})
+let app;
+firebase.auth().onAuthStateChanged(user => {
+  if(!app){
+    app =  new Vue({
+      el: '#app',
+      store: store,
+      router: router,
+      components: { Master },
+      template: '<Master/>'
+    })
+  }
+});
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  store: store,
-  router: router,
-  components: { Master },
-  template: '<Master/>'
-})
+
 
