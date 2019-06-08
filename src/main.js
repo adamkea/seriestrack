@@ -8,17 +8,22 @@ import VueAxios from 'vue-axios'
 import {store} from './store/store'
 import BootstrapVue from "bootstrap-vue"
 import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-vue/dist/bootstrap-vue.css"
+import "bootstrap-vue/dist/bootstrap-vue.css" 
+import 'vue-awesome/icons'
 import firebase from 'firebase'; 
+import Icon from 'vue-awesome/components/Icon'
 
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
+Vue.component('v-icon', Icon)
+
 
 let app;
 firebase.auth().onAuthStateChanged(user => {
   if(!app){
     app =  new Vue({
+      user: user,
       el: '#app',
       store: store,
       router: router,

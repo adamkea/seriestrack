@@ -1,13 +1,39 @@
 <template>
+
     <div id="app">
-        <ul class="nav">
-            <li><router-link v-if="isLoggedIn" :to="{name: 'home'}">My Shows</router-link></li>
-            <li><router-link v-if="isLoggedIn" :to="{name: 'search'}">Find Shows</router-link></li>
-            <li><router-link v-if="!isLoggedIn" :to="{name: 'login'}">Login</router-link></li>
-            <li><router-link v-if="!isLoggedIn" :to="{name: 'register'}">Register</router-link></li>
-            <li><button type="button" class="btn btn-primary" v-if="isLoggedIn" v-on:click="logout">Logout</button></li>
-        </ul>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+      <!-- <div class="flex bg-gray-800">
+          <nav class="flex items-center justify-between flex-wrap bg-teal">
+            <div class="flex items-center flex-no-shrink text-white">
+                <div class="text-sm sm:flex-grow"><router-link v-if="isLoggedIn" :to="{name: 'home'}" class="hover:text-white">Home</router-link></div>
+                <div class="text-sm sm:flex-grow"><router-link v-if="isLoggedIn" :to="{name: 'search'}" class="hover:text-white">Search</router-link></div>      
+              <li><router-link v-if="isLoggedIn" :to="{name: 'search'}">Find Shows</router-link></li>
+              <li><router-link v-if="!isLoggedIn" :to="{name: 'login'}">Login</router-link></li>
+              <li><router-link v-if="!isLoggedIn" :to="{name: 'register'}">Register</router-link></li>
+              <li><button type="button" class="btn btn-primary" v-if="isLoggedIn" v-on:click="logout">Logout</button></li> 
+            </div>
+          </nav>
+      </div> -->
+      <nav class="flex content-center flex-wrap font-serif font-bold text-lg bg-white h-12 shadow-md">
+        <div class="justify-start ml-6 mr-6 text-green-600">Logo</div>
+        <div class="w-full block flex-grow justify-center lg:flex lg:items-center lg:w-auto">
+          <div class="mr-6">
+            <router-link v-if="isLoggedIn" :to="{name: 'home'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Home</router-link>
+          </div>
+          <div class="mr-6">
+            <router-link v-if="isLoggedIn" :to="{name: 'search'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Search</router-link>
+          </div>
+          <div class="mr-6">
+            <a class="text-gray-600 hover:text-gray-600 hover:no-underline" href="#">Account</a>
+          </div>
+        </div>
+        <div class="mr-6" v-if="isLoggedIn" v-on:click="logout">
+          <a class="text-gray-600 hover:text-green-600 hover:no-underline" href="#">Logout</a>
+        </div>
+      </nav>
+      <div class="w-full text-black">
         <router-view></router-view>
+      </div>
     </div>
 </template>
 
@@ -37,41 +63,7 @@ export default {
 }
 </script>
 
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    font-size: 24px;
-    height: 100vh;
-  }
-  .flex-center {
-    display: flex;
-    justify-content: center;
-  }
-  .nav {
-    display: flex;
-    list-style: none;
-    padding: 15px 0;
-    margin: 0;
-    justify-content: flex-end;
-    background: #F5F8FA;
-    border-bottom: 1px solid lightgrey;
-    margin-bottom: 24px;
-  }
-  .nav a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-</style>
+<style src="../css/main.css"/>
+
+
+
