@@ -1,5 +1,4 @@
 <template>
-
     <div id="app">
       <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
       <!-- <div class="flex bg-gray-800">
@@ -15,7 +14,7 @@
           </nav>
       </div> -->
       <nav class="flex content-center flex-wrap font-serif font-bold text-lg bg-white h-12 shadow-md">
-        <div class="justify-start ml-6 mr-6 text-green-600">Logo</div>
+        <div class="justify-start ml-6 mr-6 text-green-600">SeriesTrack</div>
         <div class="w-full block flex-grow justify-center lg:flex lg:items-center lg:w-auto">
           <div class="mr-6">
             <router-link v-if="isLoggedIn" :to="{name: 'home'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Home</router-link>
@@ -24,7 +23,7 @@
             <router-link v-if="isLoggedIn" :to="{name: 'search'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Search</router-link>
           </div>
           <div class="mr-6">
-            <a class="text-gray-600 hover:text-gray-600 hover:no-underline" href="#">Account</a>
+            <router-link v-if="isLoggedIn" :to="{name: 'account'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Account</router-link>
           </div>
         </div>
         <div class="mr-6" v-if="isLoggedIn" v-on:click="logout">
@@ -44,7 +43,8 @@ export default {
     data(){
       return{
         isLoggedIn: false,
-        currentUser: false
+        currentUser: false,
+        userId: firebase.auth().currentUser.uid
       }
     },
     created(){

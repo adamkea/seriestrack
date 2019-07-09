@@ -1,18 +1,14 @@
 <template>
-    <div>
-        <div class="flex-center">
-            <div v-if="info" class="btn-group" role="group">
-                <button v-for="index in seasons" :key="index" type="button" class="btn btn-info" v-on:click="getSeason(index)">{{index}}</button>
-            </div>
+    <div class="container my-4 mx-auto px-4 md:px-12">
+        <div v-if="info" class="btn-group self-center" role="group">
+            <button v-for="index in seasons" :key="index" type="button" class="btn btn-info" v-on:click="getSeason(index)">{{index}}</button>
         </div>
         <div v-if="episodes">
-            <div>
             <div v-for="episode in episodes" :key="episode.Episode" class="card w-50 d-flex">
-                    <h5 class="card-header">{{episode.Episode}}: {{episode.Title}}</h5>
-                    <div class="card-body">
-                        <h5 class="card-text">Test</h5>
-                    </div>
-            </div>
+                <h5 class="card-header">{{episode.Episode}}: {{episode.Title}}</h5>
+                <div class="card-body">
+                    <h5 class="card-text">Test</h5>
+                </div>
             </div>
         </div>
     </div>

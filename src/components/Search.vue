@@ -1,25 +1,20 @@
 <template>
-    <div class="container mt-4">
+    <div class="container my-4 mx-auto px-4 md:px-12">
         <h2 class="text-center">Find Shows</h2>
-        <input class="form-control mb-4" type="text" placeholder="Search" aria-label="Search" v-model="search" v-on:keyup.enter="searchShow(search)">
+        <input class="form-control mb-4" type="text" placeholder="Search" aria-label="Search" v-model="search" v-on:keyup.enter="searchShow(search)"/>
         <div v-if="results" class="row">
-            <div v-for="result in results" :key="result.imdbID" :result="result">
-                <div class="col-md-4 d-flex">
-                    <div class="card flex-fill">
-                        <h5 class="card-header">{{result.Title}}</h5>
-                        <div class="card-body">
-                            <h5 class="card-text">Test</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <result v-for="show in results" :key="show.id" :show="show" class="overflow-hidden rounded-lg shadow-lg"/>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Result from './Result'
 export default{
+    components:{
+        Result,
+    },
     data(){
         return{
             results:[],
@@ -29,6 +24,7 @@ export default{
     },
     methods:{
         searchShow(query){
+            this.results = [];
             axios
                 .get('http://www.omdbapi.com/?s=' + query + '&apikey=' + this.apikey + '&type=series')
                 .then(response => this.results = response.data.Search)
@@ -36,16 +32,3 @@ export default{
     }
 }
 </script>
-
-<style>
-.card {
-    margin: 0 auto; /* Added */
-    float: none; /* Added */
-    margin-bottom: 10px; /* Added */
-    cursor: pointer; 
-}
-
-.card-body:hover{
-    background: lightblue;
-}
-</style>

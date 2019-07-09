@@ -1,15 +1,19 @@
-<template>
-    <div class="col-md-4 d-flex">
-        <div v-if="info" class="card flex-fill" v-on:click="episodes()">
-            <h5 class="card-header">{{info.Title}}</h5>
-            <div class="card-body">
-                <img :src="info.Poster" class="rounded-circle z-depth-10 img-fluid " data-holder-rendered="true"  />
-            </div>
+<template>  
+    <div class="px-2 lg:my-4 lg:px-4 lg:w-1/4 flex" v-on:click="episodes()">
+        <div class="overflow-hidden rounded-lg shadow-lg">
+            <img class="block w-full" :src="info.Poster"/>
+            <header class="items-center justify-between leading-tight p-2 md:p-4">
+                <div class="text-center">
+                    <h1 class="text-black text-lg">{{info.Title}}</h1>
+                    <div class="bg-green-600 text-sm py-1 text-center text-white" style="width: 65%">65%</div>
+                </div>
+            </header>
         </div>
     </div>
 </template>
 
 <script>
+import firebase from 'firebase/app'
 import axios from 'axios';
 export default{
     name: 'show',
@@ -23,13 +27,14 @@ export default{
         return {
             'id': this.show.id,
             'imdb': this.show.imdbID,
-            info: null,
-            'apikey': process.env.VUE_APP_API_KEY
+            info: '',
+            'apikey': process.env.VUE_APP_API_KEY,
+            userId: firebase.auth().currentUser.uid
         }
     },
     methods:{
         episodes(){
-            this.$router.push({ name: 'episodes', params: { id: this.show.imdbID } })
+            this.$router.push({ name: 'episodes', params: { id: this.show.imdbID} })
         }
     },
     mounted () {
@@ -41,14 +46,4 @@ export default{
 </script>
 
 <style>
-.card {
-    margin: 0 auto; /* Added */
-    float: none; /* Added */
-    margin-bottom: 10px; /* Added */
-    cursor: pointer; 
-}
-
-.card-body:hover{
-    background: lightblue;
-}
 </style>

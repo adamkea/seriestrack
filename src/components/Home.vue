@@ -1,9 +1,9 @@
 <template>
-        <div class="container mt-4">
-            <div class="row">
-                <show v-for="show in myShows" :key="show.id" :show="show"/>
-            </div>
-        </div>
+    <div class="container my-4 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <show v-for="show in myShows" :key="show.id" :show="show" class="overflow-hidden rounded-lg shadow-lg"/>
+        </div> 
+    </div>
 </template>
 
 <script>
@@ -26,5 +26,4 @@ export default {
 </script>
 
 <style>
-
 </style>
