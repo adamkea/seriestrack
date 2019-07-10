@@ -5,7 +5,9 @@
             <header class="items-center justify-between leading-tight p-2 md:p-4">
                 <div class="text-center">
                     <h1 class="text-black text-lg">{{info.Title}}</h1>
-                    <div class="bg-green-600 text-sm py-1 text-center text-white" style="width: 65%">65%</div>
+                    <p>Episodes: {{show.totalEps}}</p>
+                    <p>Seen: </p>
+                    <!-- <div class="bg-green-600 text-sm py-1 text-center text-white" style="width: 65%">65%</div> -->
                 </div>
             </header>
         </div>
@@ -34,7 +36,7 @@ export default{
     },
     methods:{
         episodes(){
-            this.$router.push({ name: 'episodes', params: { id: this.show.imdbID} })
+            this.$router.push({ name: 'episodes', params: { id: this.show.id, imdbID: this.show.imdbID} })
         }
     },
     mounted () {
