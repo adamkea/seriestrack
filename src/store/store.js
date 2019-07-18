@@ -43,6 +43,7 @@ export const store = new Vuex.Store({
                             id: doc.id,
                             imdbID: doc.data().imdbID,
                             totalEps: doc.data().totalEps,
+                            epsSeen: doc.data().epsSeen
                         }
                         tempShows.push(data)
                     })
@@ -54,7 +55,8 @@ export const store = new Vuex.Store({
             var docRef = db.collection('users').doc(userId).collection('shows');
             docRef.add({
                 imdbID: show.imdbID,
-                totalEps: show.totalEps
+                totalEps: show.totalEps,
+                epsSeen: 0
             }).then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
@@ -81,14 +83,18 @@ export const store = new Vuex.Store({
         addEpisode(context, show){
             var userId = firebase.auth().currentUser.uid;
             var docRef = db.collection('users').doc(userId).collection('shows').doc(show.id).collection('episodes');
+            var showRef= db.collection('users').doc(userId).collection('shows').doc(show.id);
+            var epsSeen;
             docRef.add({
                 imdbID: show.episode,
-            }).then(function(docRef) {
-                console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);
-            });
+            docRef.get().then(function(doc){
+                //add number of episodes to seen on the show
+                epsSeen = doc.docs.length;
+                showRef.update({
+                    epsSeen: epsSeen
+                })
+            })
         }
     }
 })

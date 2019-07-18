@@ -6,7 +6,7 @@
                 <div class="text-center">
                     <h1 class="text-black text-lg">{{info.Title}}</h1>
                     <p>Episodes: {{show.totalEps}}</p>
-                    <p>Seen: </p>
+                    <p>Seen: {{show.epsSeen}} </p>
                     <!-- <div class="bg-green-600 text-sm py-1 text-center text-white" style="width: 65%">65%</div> -->
                 </div>
             </header>
@@ -36,7 +36,7 @@ export default{
     },
     methods:{
         episodes(){
-            this.$router.push({ name: 'episodes', params: { id: this.show.id, imdbID: this.show.imdbID} })
+            this.$router.push({ name: 'seasons', params: { id: this.show.id, imdbID: this.show.imdbID} })
         }
     },
     mounted () {
@@ -48,4 +48,5 @@ export default{
 </script>
 
 <style>
+
 </style>

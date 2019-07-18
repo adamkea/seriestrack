@@ -1,5 +1,5 @@
 import Home from './components/Home'
-import Episode from './components/Episode'
+import Season from './components/Season'
 import Account from './components/Account'
 import Search from './components/Search'
 import Login from './components/Login'
@@ -53,9 +53,9 @@ let router = new VueRouter({
             }
         },
         { 
-            path: '/episodes/:id', 
-            name: 'episodes',
-            component: Episode,
+            path: '/seasons/:id', 
+            name: 'seasons',
+            component: Season,
             meta: {
                 requiresAuth: true
             }
