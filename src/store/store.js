@@ -64,6 +64,17 @@ export const store = new Vuex.Store({
                 console.error("Error adding document: ", error);
             });
         },
+        removeShow(context, show){
+            debugger
+            var userId = firebase.auth().currentUser.uid;
+            var docRef = db.collection('users').doc(userId).collection('shows').doc(show);
+            docRef.delete().then(function() {
+                console.log("Document removed");
+            })
+            .catch(function(error) {
+                console.error("Error removing document: ", error);
+            });
+        },
         getEpisodes(context, show){
             var userId = firebase.auth().currentUser.uid;
             var docRef = db.collection('users').doc(userId).collection('shows').doc(show).collection('episodes');

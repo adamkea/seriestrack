@@ -42,7 +42,6 @@ export default {
     },
     computed:{
         myEpisodes(){
-
             return this.$store.getters.myEpisodes
         },
     },
