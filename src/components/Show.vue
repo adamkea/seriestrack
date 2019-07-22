@@ -7,7 +7,8 @@
                     <h1 class="text-black text-lg">{{info.Title}}</h1>
                     <!-- <p>Episodes: {{show.totalEps}}</p>
                     <p>Seen: {{show.epsSeen}} </p> -->
-                    <p>% {{getPercentage()}}</p>
+                    <!-- <p>% {{getPercentage()}}</p> -->
+                    <progress-bar value="'test'" type="circle" ref="line" :options="options"></progress-bar>
                     <button v-on:click="unfollowShow()" class="bg-red-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Unfollow</button>
                 </div>
             </header>
@@ -33,7 +34,20 @@ export default{
             info: '',
             isActive: true,
             'apikey': process.env.VUE_APP_API_KEY,
-            userId: firebase.auth().currentUser.uid
+            userId: firebase.auth().currentUser.uid,
+            options: {
+                color: '#38A169',
+                strokeWidth: 3,
+                svgStyle: {
+                    padding: '8px',
+                    display: 'block',
+                    margin: 'auto',
+                    width: '40%'
+                },
+                text:{
+                    autoStyle: true
+                },
+            }
         }
     },
     methods:{
@@ -50,9 +64,18 @@ export default{
         }
     },
     mounted () {
+        //animate the progress bar
+        this.$refs.line.animate((this.show.epsSeen * 100)/parseInt(this.show.totalEps)/100),
+        this.$refs.line.setText(this.getPercentage() + "%"),    
+        //get the show data
         axios
         .get('http://www.omdbapi.com/?i=' + this.imdb + '&apikey=' + this.apikey)
         .then(response => (this.info = response.data))
     }
 }
 </script>
+
+<style>
+
+</style>
+

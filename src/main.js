@@ -12,9 +12,11 @@ import "bootstrap-vue/dist/bootstrap-vue.css"
 import 'vue-awesome/icons'
 import firebase from 'firebase'; 
 import Icon from 'vue-awesome/components/Icon'
+import VueProgress from 'vue-progress'
 
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
+Vue.use(VueProgress)
 Vue.config.productionTip = false
 Vue.component('v-icon', Icon)
 

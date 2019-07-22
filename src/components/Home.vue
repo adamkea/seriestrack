@@ -3,6 +3,7 @@
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
             <show v-for="show in myShows" :key="show.id" :show="show" class="overflow-hidden rounded-lg shadow-lg"/>
         </div> 
+        <div v-if="!myShows.length">You have no shows</div>
     </div>
 </template>
 
