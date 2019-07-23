@@ -5,10 +5,7 @@
             <header class="items-center justify-between leading-tight p-2 md:p-4">
                 <div class="text-center">
                     <h1 class="text-black text-lg">{{info.Title}}</h1>
-                    <!-- <p>Episodes: {{show.totalEps}}</p>
-                    <p>Seen: {{show.epsSeen}} </p> -->
-                    <!-- <p>% {{getPercentage()}}</p> -->
-                    <progress-bar value="'test'" type="circle" ref="line" :options="options"></progress-bar>
+                    <progress-bar type="circle" ref="line" :options="options"></progress-bar>
                     <button v-on:click="unfollowShow()" class="bg-red-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Unfollow</button>
                 </div>
             </header>

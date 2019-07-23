@@ -7,3 +7,7 @@
 .router-link-active{
     color: #38A169
   } 
+
+  #menu-toggle:checked + #menu {
+    display: block;
+  }
