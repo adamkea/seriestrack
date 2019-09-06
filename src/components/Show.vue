@@ -1,11 +1,11 @@
 <template>  
     <div class="px-2 lg:my-4 lg:px-4 lg:w-1/4 flex" v-if="isActive">
         <div class="overflow-hidden rounded-lg shadow-lg">
-            <img class="block w-full" :src="info.Poster" v-on:click="episodes()"/>
+            <img class="w-100" v-bind:src="getImg()" style="height: 25rem;" v-on:click="episodes()"/>
             <header class="items-center justify-between leading-tight p-2 md:p-4">
                 <div class="text-center">
-                    <h1 class="text-black text-lg">{{info.Title}}</h1>
-                    <progress-bar type="circle" ref="line" :options="options"></progress-bar>
+                    <h1 class="text-black text-lg">{{info.name}}</h1>
+                    <!-- <progress-bar type="circle" ref="line" :options="options"></progress-bar> -->
                     <button v-on:click="unfollowShow()" class="bg-red-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Unfollow</button>
                 </div>
             </header>
@@ -26,8 +26,8 @@ export default{
     },
     data () {
         return {
+            'showId': this.show.showId,
             'id': this.show.id,
-            'imdb': this.show.imdbID,
             info: '',
             isActive: true,
             'apikey': process.env.VUE_APP_API_KEY,
@@ -47,12 +47,20 @@ export default{
             }
         }
     },
+    computed:{
+        noImage () {
+            return require('../assets/no_image.png')
+        }
+    },
     methods:{
+        getImg(){
+            return this.info.poster_path  ? 'https://image.tmdb.org/t/p/w500/' + this.info.poster_path : this.noImage
+        },
         episodes(){
-            this.$router.push({ name: 'seasons', params: { id: this.show.id, imdbID: this.show.imdbID} })
+            this.$router.push({ name: 'seasons', params: { id: this.id, showId: this.showId}})
         },
         getPercentage(){
-            var perc = Math.round(parseInt(this.show.epsSeen * 100)/parseInt(this.show.totalEps));
+            var perc = Math.round(parseInt(this.show.epsSeen * 100)/this.info.number_of_episodes);
             return perc;
         },
         unfollowShow(){
@@ -60,15 +68,17 @@ export default{
             this.isActive = false;
         }
     },
-    mounted () {
-        //animate the progress bar
-        this.$refs.line.animate((this.show.epsSeen * 100)/parseInt(this.show.totalEps)/100),
-        this.$refs.line.setText(this.getPercentage() + "%"),    
+    mounted(){
         //get the show data
         axios
-        .get('http://www.omdbapi.com/?i=' + this.imdb + '&apikey=' + this.apikey)
+        .get('https://api.themoviedb.org/3/tv/' + this.showId + '?api_key=' + this.apikey + '&language=en-US')
         .then(response => (this.info = response.data))
-    }
+    },
+    // beforeUpdate(){
+    //     //animate the progress bar
+    //     this.$refs.line.animate((this.show.epsSeen * 100)/this.info.number_of_episodes/100),
+    //     this.$refs.line.setText(this.getPercentage() + "%") 
+    // }
 }
 </script>
 

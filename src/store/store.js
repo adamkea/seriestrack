@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import db from '../firebase'
 import firebase from 'firebase/app'
-import axios from 'axios'
-import { ESPIPE } from 'constants';
 
 Vue.use(Vuex)
 
@@ -41,8 +39,8 @@ export const store = new Vuex.Store({
                     querySnapshot.forEach(doc => {
                         const data = {
                             id: doc.id,
-                            imdbID: doc.data().imdbID,
-                            totalEps: doc.data().totalEps,
+                            showId: doc.data().showId,
+                            // totalEps: doc.data().totalEps
                             epsSeen: doc.data().epsSeen
                         }
                         tempShows.push(data)
@@ -54,8 +52,8 @@ export const store = new Vuex.Store({
             var userId = firebase.auth().currentUser.uid;
             var docRef = db.collection('users').doc(userId).collection('shows');
             docRef.add({
-                imdbID: show.imdbID,
-                totalEps: show.totalEps,
+                showId: show.showId,
+                totalEps: 0,
                 epsSeen: 0
             }).then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
@@ -84,7 +82,7 @@ export const store = new Vuex.Store({
                     querySnapshot.forEach(doc => {
                         const data = {
                             id: doc.id,
-                            imdbID: doc.data().imdbID
+                            episodeId: doc.data().episodeId
                         }
                         tempEpisodes.push(data)
                     })
@@ -92,12 +90,13 @@ export const store = new Vuex.Store({
                 })
         },
         addEpisode(context, show){
+            debugger;
             var userId = firebase.auth().currentUser.uid;
             var docRef = db.collection('users').doc(userId).collection('shows').doc(show.id).collection('episodes');
             var showRef= db.collection('users').doc(userId).collection('shows').doc(show.id);
             var epsSeen;
             docRef.add({
-                imdbID: show.episode,
+                episodeId: show.episode,
             })
             docRef.get().then(function(doc){
                 //add number of episodes to seen on the show
@@ -106,7 +105,7 @@ export const store = new Vuex.Store({
                     epsSeen: epsSeen
                 })
             })
-        }
+        }  
     }
 })
 

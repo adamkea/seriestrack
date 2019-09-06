@@ -1,11 +1,12 @@
 <template>
     <div class="container my-4 mx-auto px-4 md:px-12">
-        <div v-if="info" class="btn-group" role="group">
+        <!-- <div class="btn-group" role="group">
             <button v-for="index in seasons" :key="index" type="button" class="btn btn-info" v-on:click="getSeason(index)">{{index}}</button>
-        </div>
-        <div v-if="episodes">
-            <episode v-for="episode in episodes" :key="episode.id" :episode="episode" :showID="id" :seen="hasSeen(episode.imdbID)"/>
-        </div>
+        </div> -->
+        <ul class="flex list-reset border overflow-x-auto border-grey-light rounded w-auto font-sans">
+            <li v-for="index in seasons" :key="index" v-on:click="getSeason(index)"><a class="block hover:text-blue-600 hover:bg-blue text-green border-r border-grey-light px-10 py-2" href="#">{{index}}</a></li>
+        </ul>
+        <episode v-for="episode in episodes" :key="episode.id" :episode="episode" :showId="showId" :seen="hasSeen(episode.id)"/>
     </div>
 </template>
 
@@ -20,25 +21,26 @@ export default {
     data(){
         return{
             info:null,
+            seasons: null,
             episodes: null,
+            showId: null,
             'id': null,
             'apikey': process.env.VUE_APP_API_KEY
         }
     },
     created(){
-        this.imdbID = this.$route.params.imdbID;
-        this.id = this.$route.params.id;
+        this.id = this.$route.params.id,
+        this.showId = this.$route.params.showId,
         this.seen = true;
         this.episodes = axios
-                .get('http://www.omdbapi.com/?i=' + this.imdbID + '&Season=1&apikey=' + this.apikey)
-                .then(response => (this.episodes = response.data.Episodes));
+                .get('https://api.themoviedb.org/3/tv/' + this.showId + '/season/1?api_key=' + this.apikey + '&language=en-US')
+                .then(response => (this.episodes = response.data.episodes));
         this.$store.dispatch('getEpisodes', this.id)
     },
     mounted(){
         axios
-            .get('http://www.omdbapi.com/?i=' + this.imdbID + '&apikey=' + this.apikey)
-            .then(response => {this.info = response.data,
-                            this.seasons = parseInt(response.data.totalSeasons)})
+            .get('https://api.themoviedb.org/3/tv/' + this.showId + '?api_key=' + this.apikey + '&language=en-US')
+            .then(response => this.seasons = response.data.number_of_seasons)
     },
     computed:{
         myEpisodes(){
@@ -49,12 +51,12 @@ export default {
         getSeason(index){
             //get all the episodes for a specific season
             axios
-                .get('http://www.omdbapi.com/?i=' + this.imdbID + '&Season=' + index + '&apikey=' + this.apikey)
-                .then(response => (this.episodes = response.data.Episodes))
+                .get('https://api.themoviedb.org/3/tv/' + this.showId + '/season/' + index + '?api_key=' + this.apikey + '&language=en-US')
+                .then(response => (this.episodes = response.data.episodes))
         },
         hasSeen(episode){
             //check to see if this episode is in your seen episodes collection
-            return this.myEpisodes.filter(e => e.imdbID === episode).length > 0;
+            return this.myEpisodes.filter(e => e.episodeId === episode).length > 0;
         }
     }
 }

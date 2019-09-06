@@ -26,8 +26,8 @@ export default{
         searchShow(query){
             this.results = [];
             axios
-                .get('http://www.omdbapi.com/?s=' + query + '&apikey=' + this.apikey + '&type=series')
-                .then(response => this.results = response.data.Search)
+                .get('https://api.themoviedb.org/3/search/tv?api_key=' + this.apikey +'&query=' + query)
+                .then(response => this.results = response.data.results)
         }
     }
 }

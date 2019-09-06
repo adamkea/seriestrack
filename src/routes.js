@@ -53,7 +53,7 @@ let router = new VueRouter({
             }
         },
         { 
-            path: '/seasons/:id', 
+            path: '/seasons/:id/:showId', 
             name: 'seasons',
             component: Season,
             meta: {

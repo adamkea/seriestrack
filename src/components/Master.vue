@@ -6,14 +6,14 @@
           <div class="flex-1 flex justify-between items-center">
             <div class="text-green-600 lg:ml-6"><v-icon name="tv"></v-icon> SeriesTracker</div>
           </div>
-          <label for="menu-toggle" class="pointer-cursor lg:hidden block"><svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><title>menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg></label>
+          <label for="menu-toggle" class="pointer-cursor lg:hidden block" v-if="isLoggedIn"><svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><title>menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg></label>
           <input class="hidden" type="checkbox" id="menu-toggle" />
           <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
             <nav>
               <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
-                <li class="mr-6"><router-link v-if="isLoggedIn" :to="{name: 'home'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Home</router-link></li>
-                <li class="mr-6"><router-link v-if="isLoggedIn" :to="{name: 'search'}" class="text-gray-600 hover:text-gray-600 hover:no-underline" exact>Search</router-link></li>
-                <li class="mr-6"><a class="text-gray-600 hover:text-green-600 hover:no-underline" href="#">Logout</a></li>
+                <li class="mr-6"><router-link v-if="isLoggedIn" :to="{name: 'home'}" class="text-gray-600 hover:text-green-600 hover:no-underline" exact>Home</router-link></li>
+                <li class="mr-6"><router-link v-if="isLoggedIn" :to="{name: 'search'}" class="text-gray-600 hover:text-green-600 hover:no-underline" exact>Search</router-link></li>
+                <li class="mr-6"><a class="text-gray-600 hover:text-green-600 hover:no-underline" href="#" v-if="isLoggedIn" v-on:click="logout()">Logout</a></li>
               </ul>
             </nav>
           </div>
