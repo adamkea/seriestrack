@@ -1,7 +1,7 @@
 <template>  
-    <div class="px-2 lg:my-4 lg:px-4 lg:w-1/4 flex">
+    <div class="px-2 pb-2 w-1/2 lg:w-1/4 flex">
         <div class="overflow-hidden rounded-lg shadow-lg">
-            <img class="w-100" style="height: 25rem;" v-bind:src="getImg()"/>
+            <img v-bind:src="getImg()"/>
             <header class="items-center justify-between leading-tight p-2 md:p-4">
                 <div class="text-center">
                     <h1 class="text-black text-lg">{{show.name}}</h1>
@@ -50,7 +50,7 @@ export default{
     },
     methods:{
         getImg(){
-            return this.show.poster_path  ? 'https://image.tmdb.org/t/p/w500/' + this.show.poster_path : this.noImage
+            return this.show.backdrop_path  ? 'https://image.tmdb.org/t/p/w500/' + this.show.backdrop_path : this.noImage
         },
         addShow(){
             this.$store.dispatch('addShow',{

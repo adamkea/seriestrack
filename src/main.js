@@ -12,7 +12,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css"
 import 'vue-awesome/icons'
 import firebase from 'firebase'; 
 import Icon from 'vue-awesome/components/Icon'
-import VueProgress from 'vue-progress'
+import VueProgress from 'vue-progress/src/index'
 
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)

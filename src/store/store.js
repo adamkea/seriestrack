@@ -63,7 +63,6 @@ export const store = new Vuex.Store({
             });
         },
         removeShow(context, show){
-            debugger
             var userId = firebase.auth().currentUser.uid;
             var docRef = db.collection('users').doc(userId).collection('shows').doc(show);
             docRef.delete().then(function() {
@@ -90,7 +89,6 @@ export const store = new Vuex.Store({
                 })
         },
         addEpisode(context, show){
-            debugger;
             var userId = firebase.auth().currentUser.uid;
             var docRef = db.collection('users').doc(userId).collection('shows').doc(show.id).collection('episodes');
             var showRef= db.collection('users').doc(userId).collection('shows').doc(show.id);

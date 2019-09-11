@@ -1,12 +1,12 @@
 <template>  
-    <div class="px-2 lg:my-4 lg:px-4 lg:w-1/4 flex" v-if="isActive">
+    <div class="px-2 pb-2 w-1/2 lg:w-1/4 flex" v-if="isActive">
         <div class="overflow-hidden rounded-lg shadow-lg">
-            <img class="w-100" v-bind:src="getImg()" style="height: 25rem;" v-on:click="episodes()"/>
+            <img v-bind:src="getImg()" v-on:click="episodes()"/>
             <header class="items-center justify-between leading-tight p-2 md:p-4">
                 <div class="text-center">
                     <h1 class="text-black text-lg">{{info.name}}</h1>
-                    <!-- <progress-bar type="circle" ref="line" :options="options"></progress-bar> -->
-                    <button v-on:click="unfollowShow()" class="bg-red-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Unfollow</button>
+                    <progress-bar type="circle" ref="line" :options="options"></progress-bar>
+                    <v-icon class="float-right m-2 text-red-600" @click.native="unfollowShow()" name="trash-alt"></v-icon>
                 </div>
             </header>
         </div>
@@ -54,17 +54,18 @@ export default{
     },
     methods:{
         getImg(){
-            return this.info.poster_path  ? 'https://image.tmdb.org/t/p/w500/' + this.info.poster_path : this.noImage
+            return this.info.poster_path  ? 'https://image.tmdb.org/t/p/w500/' + this.info.backdrop_path : this.noImage
         },
         episodes(){
-            this.$router.push({ name: 'seasons', params: { id: this.id, showId: this.showId}})
+            this.$router.push({ name: 'seasons', params: { id: this.id, showId: this.showId.toString()}})
         },
         getPercentage(){
             var perc = Math.round(parseInt(this.show.epsSeen * 100)/this.info.number_of_episodes);
             return perc;
         },
         unfollowShow(){
-            this.$store.dispatch('removeShow',this.show.id)
+            debugger;
+            this.$store.dispatch('removeShow',this.id)
             this.isActive = false;
         }
     },
@@ -74,11 +75,11 @@ export default{
         .get('https://api.themoviedb.org/3/tv/' + this.showId + '?api_key=' + this.apikey + '&language=en-US')
         .then(response => (this.info = response.data))
     },
-    // beforeUpdate(){
-    //     //animate the progress bar
-    //     this.$refs.line.animate((this.show.epsSeen * 100)/this.info.number_of_episodes/100),
-    //     this.$refs.line.setText(this.getPercentage() + "%") 
-    // }
+    beforeUpdate(){
+        //animate the progress bar
+        this.$refs.line.animate((this.show.epsSeen * 100)/this.info.number_of_episodes/100),
+        this.$refs.line.setText(this.getPercentage() + "%") 
+    }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="container my-4 mx-auto px-4 md:px-12">
+    <div class="container my-2">
         <div class="flex flex-wrap">
-            <show v-for="show in myShows" :key="show.showId" :id="show.id" :show="show" class="overflow-hidden rounded-lg shadow-lg"/>
+            <show v-for="show in myShows" :key="show.showId" :id="show.id" :show="show"/>
         </div> 
         <div v-if="!myShows.length">You have no shows</div>
     </div>

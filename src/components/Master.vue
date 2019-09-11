@@ -2,7 +2,7 @@
     <div id="app">
       <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
       <body class="antialiased font-serif font-bold text-lg bg-white h-12">
-        <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2">
+        <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center ">
           <div class="flex-1 flex justify-between items-center">
             <div class="text-green-600 lg:ml-6"><v-icon name="tv"></v-icon> SeriesTracker</div>
           </div>
