@@ -1,10 +1,11 @@
 <template>  
-    <div class="px-2 pb-2 w-1/2 lg:w-1/4 flex" v-if="isActive">
+    <div class="px-2 pb-2 w-1/2 lg:w-1/4 flex cursor-pointer" v-if="isActive">
         <div class="overflow-hidden rounded-lg shadow-lg">
             <img v-bind:src="getImg()" v-on:click="episodes()"/>
             <header class="items-center justify-between leading-tight p-2 md:p-4">
                 <div class="text-center">
                     <h1 class="text-black text-lg">{{info.name}}</h1>
+                    <p v-show="false">{{show.epsSeen}}</p>
                     <progress-bar type="circle" ref="line" :options="options"></progress-bar>
                     <v-icon class="float-right m-2 text-red-600" @click.native="unfollowShow()" name="trash-alt"></v-icon>
                 </div>
@@ -50,7 +51,7 @@ export default{
     computed:{
         noImage () {
             return require('../assets/no_image.png')
-        }
+        },
     },
     methods:{
         getImg(){
@@ -64,8 +65,7 @@ export default{
             return perc;
         },
         unfollowShow(){
-            debugger;
-            this.$store.dispatch('removeShow',this.id)
+            this.$store.dispatch('removeShow',this.show.id)
             this.isActive = false;
         }
     },
@@ -75,15 +75,12 @@ export default{
         .get('https://api.themoviedb.org/3/tv/' + this.showId + '?api_key=' + this.apikey + '&language=en-US')
         .then(response => (this.info = response.data))
     },
-    beforeUpdate(){
+    updated(){
         //animate the progress bar
-        this.$refs.line.animate((this.show.epsSeen * 100)/this.info.number_of_episodes/100),
-        this.$refs.line.setText(this.getPercentage() + "%") 
+        if(this.isActive){
+            this.$refs.line.animate((this.show.epsSeen * 100)/this.info.number_of_episodes/100),
+            this.$refs.line.setText(this.getPercentage() + "%")
+        }
     }
 }
 </script>
-
-<style>
-
-</style>
-
