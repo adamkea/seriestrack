@@ -4,7 +4,7 @@
     <body class="antialiased font-serif font-bold text-lg bg-white h-12">
       <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center ">
         <div class="flex-1 flex justify-between items-center py-4">
-          <div class="text-green-600 lg:ml-6"><v-icon name="tv"></v-icon> Series Tracker</div>
+          <div class="text-green-600 lg:ml-6 cursor-pointer" v-on:click="home()"><v-icon name="tv"></v-icon> Series Tracker</div>
         </div>
         <label for="menu-toggle" class="pointer-cursor lg:hidden block" v-if="isLoggedIn"><svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><title>menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg></label>
         <input class="hidden" type="checkbox" id="menu-toggle" />
@@ -46,6 +46,9 @@ export default {
         firebase.auth().signOut().then(() =>  {
           this.$router.go({ path: this.$router.path });
         });
+      },
+      home(){
+        this.$router.push({name: 'home'})
       }
     }
 }

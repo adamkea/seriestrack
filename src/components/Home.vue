@@ -3,7 +3,7 @@
         <div class="flex flex-wrap">
             <show v-for="show in myShows" :key="show.showId" :id="show.id" :show="show"/>
         </div> 
-        <div v-if="!myShows.length">You have no shows</div>
+        <div v-if="!myShows.length" class="text-center mt-10">You currently have no shows. Search for shows to start building your dashboard.</div>
     </div>
 </template>
 

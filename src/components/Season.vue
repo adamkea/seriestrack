@@ -3,8 +3,8 @@
         <!-- <div class="btn-group" role="group">
             <button v-for="index in seasons" :key="index" type="button" class="btn btn-info" v-on:click="getSeason(index)">{{index}}</button>
         </div> -->
-        <ul class="flex list-reset border overflow-x-auto border-grey-light rounded w-auto font-sans">
-            <li v-for="index in seasons" :key="index" v-on:click="getSeason(index)"><a class="block hover:text-blue-600 hover:bg-blue text-green border-r border-grey-light px-10 py-2" href="#">{{index}}</a></li>
+        <ul class="flex list-reset border overflow-x-auto border-grey-light rounded w-auto font-sans mb-2">
+            <li v-for="index in seasons" :key="index" v-on:click="getSeason(index)"><a class="block hover:text-green-400 text-green-600 border-r border-grey-light px-10 py-2 active:text-blue-600" href="#">{{index}}</a></li>
         </ul>
         <episode v-for="episode in episodes" :key="episode.id" :episode="episode" :showId="showId" :seen="hasSeen(episode.id)"/>
     </div>
@@ -24,6 +24,8 @@ export default {
             seasons: null,
             episodes: null,
             showId: null,
+            isActive: true,
+            activeSeason: 1,
             'id': null,
             'apikey': process.env.VUE_APP_API_KEY
         }
@@ -53,6 +55,7 @@ export default {
             axios
                 .get('https://api.themoviedb.org/3/tv/' + this.showId + '/season/' + index + '?api_key=' + this.apikey + '&language=en-US')
                 .then(response => (this.episodes = response.data.episodes))
+            this.activeSeason = index;
         },
         hasSeen(episode){
             //check to see if this episode is in your seen episodes collection

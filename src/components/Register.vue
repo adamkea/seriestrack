@@ -3,7 +3,7 @@
    <form class="bg-white border border-green-600 shadow-md rounded px-8 pt-6 pb-8 mb-4">
     <p class="font-serif font-bold text-gray-800 text-lg">Sign Up</p>
     <div class="mb-4">
-      <input type="email" id="email" v-model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  placeholder="Username">
+      <input type="email" id="email" v-model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  placeholder="Email">
     </div>
     <div class="mb-6">
       <input type="password" id="password" v-model="password"  class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" placeholder="Password">
