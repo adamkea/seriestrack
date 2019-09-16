@@ -3,6 +3,7 @@ import Season from './components/Season'
 import Account from './components/Account'
 import Search from './components/Search'
 import Login from './components/Login'
+import Landing from './components/Landing'
 import Register from './components/Register'
 import firebase from 'firebase/app'
 import Vue from 'vue'
@@ -24,6 +25,14 @@ let router = new VueRouter({
             path: '/login',
             name: 'login', 
             component: Login,
+            meta: {
+                requiresGuest: true
+            }
+        },
+        {
+            path: '/landing',
+            name: 'landing', 
+            component: Landing,
             meta: {
                 requiresGuest: true
             }
@@ -69,9 +78,9 @@ router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)){
         //check if not logged in
         if(!firebase.auth().currentUser){
-            //go to login
+            //go to landing
             next({
-                path: '/login',
+                path: '/landing',
                 query: {
                     redirect: to.fullPath
                 }

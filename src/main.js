@@ -20,7 +20,6 @@ Vue.use(VueProgress)
 Vue.config.productionTip = false
 Vue.component('v-icon', Icon)
 
-
 let app;
 firebase.auth().onAuthStateChanged(user => {
   if(!app){

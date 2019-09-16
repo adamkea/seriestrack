@@ -1,5 +1,5 @@
 <template>
-    <div class="container my-2">
+    <div class="my-4 lg:px-20">
         <div class="flex flex-wrap">
             <show v-for="show in myShows" :key="show.showId" :id="show.id" :show="show"/>
         </div> 

@@ -1,5 +1,5 @@
 <template>  
-    <div class="px-2 pb-2 w-1/2 lg:w-1/4 flex cursor-pointer" v-if="isActive">
+    <div class="px-2 pb-2 w-1/2 lg-1/4 xl:w-1/5 flex cursor-pointer" v-if="isActive">
         <div class="overflow-hidden rounded-lg shadow-lg">
             <img v-bind:src="getImg()" v-on:click="episodes()"/>
             <header class="items-center justify-between leading-tight p-2 md:p-4">
